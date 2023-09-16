@@ -1,0 +1,43 @@
+import { useEffect, useState } from 'react';
+import { Pokemon } from './__internal__/Pokemon';
+import { PokemonProps } from './types';
+
+const dummyData: PokemonProps[] = [
+  {
+    pokedexId: 2,
+    name: 'Ivysaur',
+    types: ['grass', 'poison'],
+    height: 10,
+    weight: 130,
+    spriteUrl:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png',
+  },
+  {
+    pokedexId: 25,
+    name: 'Pikachu',
+    types: ['electric'],
+    spriteUrl:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
+  },
+];
+
+export const PokemonPage = () => {
+  const [pokemonData, setPokemonData] = useState<PokemonProps[]>([]);
+
+  useEffect(() => {
+    setPokemonData(dummyData);
+  }, []);
+
+  return (
+    <div>
+      {pokemonData.map(({ pokedexId, name, spriteUrl }) => (
+        <Pokemon
+          key={pokedexId}
+          pokedexId={pokedexId}
+          name={name}
+          spriteUrl={spriteUrl}
+        />
+      ))}
+    </div>
+  );
+};
